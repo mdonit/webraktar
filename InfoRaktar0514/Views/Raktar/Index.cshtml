@@ -1,0 +1,59 @@
+﻿@model InfoRaktar0514.Models.AruKereses
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Raktar" asp-action="Index" method="get">
+    Megnevezés: <input type="text" asp-for="MegnevezesKeres" />
+
+    Beszállító: 
+    <select asp-for="BeszallitoKeres" asp-items="Model.BeszallitoLista">
+        <option value="">Összes</option>
+    </select>
+
+    <button type="submit">Keresés</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AruLista[0].Megnevezes)
+            </th>
+            <th class="d-none d-lg-block">
+                @Html.DisplayNameFor(model => model.AruLista[0].Beszallito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AruLista[0].Ar)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.AruLista) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Megnevezes)
+            </td>
+            <td class="d-none d-lg-block">
+                @Html.DisplayFor(modelItem => item.Beszallito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ar)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
